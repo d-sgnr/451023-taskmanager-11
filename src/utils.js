@@ -1,6 +1,16 @@
+import {ESC_KEYCODE, ENTER_KEYCODE} from './const.js'
+
 export const RenderPosition = {
   AFTERBEGIN: `afterbegin`,
   BEFOREEND: `beforeend`
+};
+
+export const isEscKeyDown = (evt, action) => {
+  evt.keyCode === ESC_KEYCODE ? action() : ``;
+};
+
+export const isEnterKeyDown = (evt, action) => {
+  evt.keyCode === ENTER_KEYCODE ? action() : ``;
 };
 
 const castTimeFormat = (value) => {

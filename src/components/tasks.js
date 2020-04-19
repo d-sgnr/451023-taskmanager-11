@@ -6,7 +6,6 @@ const createTasksTemplate = () => {
   );
 };
 
-
 export default class Tasks {
   constructor() {
     this._element = null;

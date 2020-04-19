@@ -7,10 +7,18 @@ import TasksComponent from "./components/tasks.js";
 import NoTasksComponent from "./components/no-tasks.js";
 import SiteMenuComponent from "./components/site-menu.js";
 import SortComponent from "./components/sort.js";
-import {generateTasks} from "./mock/task.js";
-import {generateFilters} from "./mock/filter.js";
-import {render, RenderPosition} from "./utils.js";
-
+import {
+  generateTasks
+} from "./mock/task.js";
+import {
+  generateFilters
+} from "./mock/filter.js";
+import {
+  render,
+  RenderPosition,
+  isEnterKeyDown,
+  isEscKeyDown
+} from "./utils.js";
 
 const TASK_COUNT = 22;
 const SHOWING_TASKS_COUNT_ON_START = 8;
@@ -23,22 +31,18 @@ const renderTask = (taskListElement, task) => {
 
   const replaceEditToTask = () => {
     taskListElement.replaceChild(taskComponent.getElement(), taskEditComponent.getElement());
+    document.removeEventListener(`keydown`, onEscKeyDownEditClose);
   };
 
-  const onEscKeyDown = (evt) => {
-    const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
-
-    if (isEscKey) {
-      replaceEditToTask();
-      document.removeEventListener(`keydown`, onEscKeyDown);
-    }
+  const onEscKeyDownEditClose = (evt) => {
+    isEscKeyDown(evt, replaceEditToTask);
   };
 
   const taskComponent = new TaskComponent(task);
   const editButton = taskComponent.getElement().querySelector(`.card__btn--edit`);
   editButton.addEventListener(`click`, () => {
     replaceTaskToEdit();
-    document.addEventListener(`keydown`, onEscKeyDown);
+    document.addEventListener(`keydown`, onEscKeyDownEditClose);
   });
 
   const taskEditComponent = new TaskEditComponent(task);
@@ -46,7 +50,6 @@ const renderTask = (taskListElement, task) => {
   editForm.addEventListener(`submit`, (evt) => {
     evt.preventDefault();
     replaceEditToTask();
-    document.removeEventListener(`keydown`, onEscKeyDown);
   });
 
   render(taskListElement, taskComponent.getElement(), RenderPosition.BEFOREEND);

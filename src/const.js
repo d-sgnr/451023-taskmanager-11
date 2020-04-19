@@ -1,8 +1,11 @@
-const COLORS = [`black`, `yellow`, `blue`, `green`, `pink`];
+export const ESC_KEYCODE = 27;
+export const ENTER_KEYCODE = 13;
 
-const DAYS = [`mo`, `tu`, `we`, `th`, `fr`, `sa`, `su`];
+export const COLORS = [`black`, `yellow`, `blue`, `green`, `pink`];
 
-const MONTH_NAMES = [
+export const DAYS = [`mo`, `tu`, `we`, `th`, `fr`, `sa`, `su`];
+
+export const MONTH_NAMES = [
   `January`,
   `February`,
   `March`,
@@ -16,7 +19,3 @@ const MONTH_NAMES = [
   `November`,
   `December`,
 ];
-
-export {COLORS};
-export {DAYS};
-export {MONTH_NAMES};
