@@ -18,12 +18,11 @@ export const formatTime = (date) => {
   return `${hours}:${minutes}`;
 };
 
-export const sortArray = (property, order = `-1`) => {
-  const sortOrder = order;
+export const sortArray = (property, asc = false) => {
+  let sortOrder = 1;
 
-  if (property[0] === `-`) {
-    sortOrder = 1;
-    property = property.substr(1);
+  if (!asc) {
+    sortOrder = -1;
   }
 
   return function (a, b) {

@@ -65,7 +65,7 @@ const getSortedTasks = (tasks, sortType, from, to) => {
       sortedTasks = showingTasks.sort(sortArray(`dueDate`));
       break;
     case SortType.DATE_DOWN:
-      sortedTasks = showingTasks.sort(sortArray(`dueDate`, `1`));
+      sortedTasks = showingTasks.sort(sortArray(`dueDate`, true));
       break;
     case SortType.DEFAULT:
       sortedTasks = showingTasks;
