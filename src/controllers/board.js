@@ -13,8 +13,8 @@ import {
   RenderPosition
 } from "../utils/render.js";
 import {
-  isEnterKeyDown,
-  isEscKeyDown
+  isEscKeyDown,
+  sortArray
 } from "../utils/common.js";
 
 const SHOWING_TASKS_COUNT_ON_START = 8;
@@ -37,14 +37,10 @@ const renderTask = (taskListElement, task) => {
     isEscKeyDown(evt, replaceEditToTask);
   };
 
-  const editButton = taskComponent.getElement().querySelector(`.card__btn--edit`);
-
   taskComponent.setEditButtonClickHandler(() => {
     replaceTaskToEdit();
     document.addEventListener(`keydown`, onEscKeyDownEditClose);
   });
-
-  const editForm = taskEditComponent.getElement().querySelector(`form`);
 
   taskEditComponent.setSubmitHandler((evt) => {
     evt.preventDefault();
@@ -66,10 +62,10 @@ const getSortedTasks = (tasks, sortType, from, to) => {
 
   switch (sortType) {
     case SortType.DATE_UP:
-      sortedTasks = showingTasks.sort((a, b) => a.dueDate - b.dueDate);
+      sortedTasks = showingTasks.sort(sortArray(`dueDate`));
       break;
     case SortType.DATE_DOWN:
-      sortedTasks = showingTasks.sort((a, b) => b.dueDate - a.dueDate);
+      sortedTasks = showingTasks.sort(sortArray(`dueDate`, true));
       break;
     case SortType.DEFAULT:
       sortedTasks = showingTasks;
