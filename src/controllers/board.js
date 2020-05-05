@@ -200,4 +200,13 @@ export default class BoardController {
       remove(this._loadMoreButtonComponent);
     }
   }
+
+  hide() {
+    this._container.hide();
+    this._onSortTypeChange(SortType.DEFAULT);
+  }
+
+  show() {
+    this._container.show();
+  }
 }
