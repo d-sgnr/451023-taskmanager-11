@@ -44,7 +44,6 @@ export default class TaskController {
     this._mode = Mode.DEFAULT;
     this._taskComponent = null;
     this._taskEditComponent = null;
-
     this._onEscKeyDown = this._onEscKeyDown.bind(this);
   }
 
@@ -119,7 +118,7 @@ export default class TaskController {
     this._taskEditComponent.reset();
 
     if (this._mode === Mode.ADDING) {
-      this._onDataChange(this, EmptyTask, null);
+      this._onDataChange(EmptyTask, null);
     }
 
     if (document.contains(this._taskEditComponent.getElement())) {
